@@ -1,8 +1,10 @@
+import Body from "./components/Body/Body";
+
 function App() {
   return (
-    <div className="text-green-500">
-      Netflix Gpt
-    </div>
+    <>
+      <Body />
+    </>
   );
 }
 
