@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header/Header";
 import netflixBg from "../../assets/Netflix-bg.jpg";
 
 const Login = () => {
+  const [isSignIn, setIsSignIn] = useState(true);
+
+  function handleToggle() {
+    setIsSignIn(!isSignIn);
+  }
+
   return (
     <div className="relative h-screen w-screen">
       {/* Background Image */}
@@ -21,8 +27,17 @@ const Login = () => {
       {/* Login Form */}
       <div className="relative flex justify-center items-center h-full">
         <form className="bg-black bg-opacity-60 w-full max-w-md p-10 rounded-md text-white shadow-lg">
-          <h1 className="text-3xl font-bold mb-6">Sign In</h1>
+          <h1 className="text-3xl font-bold mb-6">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </h1>
           <div className="space-y-4">
+            {!isSignIn && (
+              <input
+                className="border border-gray-600 bg-black bg-opacity-60 text-white p-3 rounded-sm w-full focus:outline-none focus:border-red-500"
+                type="text"
+                placeholder="Name"
+              />
+            )}
             <input
               className="border border-gray-600 bg-black bg-opacity-60 text-white p-3 rounded-sm w-full focus:outline-none focus:border-red-500"
               type="text"
@@ -35,7 +50,7 @@ const Login = () => {
             />
           </div>
           <button className="bg-red-600 hover:bg-red-700 p-3 mt-6 w-full font-semibold rounded-sm">
-            Sign In
+            {isSignIn ? "Sign In" : "Sign Up"}
           </button>
           <div className="flex justify-between items-center mt-4 text-gray-400 text-sm">
             <div>
@@ -44,9 +59,13 @@ const Login = () => {
             </div>
           </div>
           <div className="mt-8 text-gray-400">
-            <span>New to Netflix? </span>
-            <a href className="text-white hover:underline">
-              Sign up now.
+            <span>{isSignIn ? "New to Netflix?" : "Already an User"} </span>
+            <a
+              href
+              className="text-white hover:underline"
+              onClick={handleToggle}
+            >
+              {isSignIn ? "Sign Up now." : "Sign In now."}
             </a>
           </div>
         </form>
