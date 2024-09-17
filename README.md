@@ -19,7 +19,7 @@ Welcome to **Netflix GPT**! This React application leverages the power of AI to 
 |-----------------|------------------------------------------|--------------------------------------------------|
 | **React**       | ![React Icon](https://img.icons8.com/color/48/000000/react-native.png) | For building the user interface.                |
 | **Node.js**     | ![Node.js Icon](https://img.icons8.com/color/48/000000/nodejs.png) | For server-side operations (if applicable).      |
-| **OpenAI GPT**  | ![OpenAI Icon](https://img.icons8.com/color/48/000000/openai.png) | For generating movie recommendations and insights. |
+| **OpenAI GPT**  | ![OpenAI Icon](image.png) | For generating movie recommendations and insights. |
 | **Tailwind CSS**| ![Tailwind CSS Icon](https://img.icons8.com/color/48/000000/tailwindcss.png) | For styling and responsive design.             |
 
 ## 🪄Installation
