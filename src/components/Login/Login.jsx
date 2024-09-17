@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import React, { useState } from "react";
 import Header from "../Header/Header";
 import netflixBg from "../../assets/Netflix-bg.jpg";
 
@@ -9,13 +8,6 @@ const Login = () => {
   function handleToggle() {
     setIsSignIn(!isSignIn);
   }
-
-  const [isSignIn, setIsSignIn] = useState(true);
-
-  function handleToggle() {
-    setIsSignIn(!isSignIn);
-  }
-
   return (
     <div className="relative h-screen w-screen">
       {/* Background Image */}
@@ -37,17 +29,7 @@ const Login = () => {
           <h1 className="text-3xl font-bold mb-6">
             {isSignIn ? "Sign In" : "Sign Up"}
           </h1>
-          <h1 className="text-3xl font-bold mb-6">
-            {isSignIn ? "Sign In" : "Sign Up"}
-          </h1>
           <div className="space-y-4">
-            {!isSignIn && (
-              <input
-                className="border border-gray-600 bg-black bg-opacity-60 text-white p-3 rounded-sm w-full focus:outline-none focus:border-red-500"
-                type="text"
-                placeholder="Name"
-              />
-            )}
             {!isSignIn && (
               <input
                 className="border border-gray-600 bg-black bg-opacity-60 text-white p-3 rounded-sm w-full focus:outline-none focus:border-red-500"
@@ -68,7 +50,6 @@ const Login = () => {
           </div>
           <button className="bg-red-600 hover:bg-red-700 p-3 mt-6 w-full font-semibold rounded-sm">
             {isSignIn ? "Sign In" : "Sign Up"}
-            {isSignIn ? "Sign In" : "Sign Up"}
           </button>
           <div className="flex justify-between items-center mt-4 text-gray-400 text-sm">
             <div>
@@ -80,7 +61,7 @@ const Login = () => {
             <span>{isSignIn ? "New to Netflix?" : "Already an User"} </span>
             <a
               href
-              className="text-white hover:underline"
+              className="text-white hover:underline cursor-pointer"
               onClick={handleToggle}
             >
               {isSignIn ? "Sign Up now." : "Sign In."}
