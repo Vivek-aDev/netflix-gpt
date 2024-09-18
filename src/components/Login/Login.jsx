@@ -7,7 +7,6 @@ const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
 
-  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -18,7 +17,7 @@ const Login = () => {
     // console.log(password);
 
     const message = checkValidData(email.current.value, password.current.value);
-    console.log(message);
+    // console.log(message);
     setErrorMessage(message);
   }
 
@@ -52,7 +51,6 @@ const Login = () => {
           <div className="space-y-4">
             {!isSignIn && (
               <input
-                ref={name}
                 className="border border-gray-600 bg-black bg-opacity-60 text-white p-3 rounded-sm w-full focus:outline-none focus:border-red-500"
                 type="text"
                 placeholder="Name"
