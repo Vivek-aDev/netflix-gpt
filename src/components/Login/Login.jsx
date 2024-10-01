@@ -2,10 +2,17 @@ import React, { useRef, useState } from "react";
 import Header from "../Header/Header";
 import netflixBg from "../../assets/Netflix-bg.jpg";
 import { checkValidData } from "../../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
+  const navigate = useNavigate();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -19,11 +26,52 @@ const Login = () => {
     const message = checkValidData(email.current.value, password.current.value);
     // console.log(message);
     setErrorMessage(message);
+
+    if (message) return;
+
+    if (!isSignIn) {
+      //sign up form logic when not sign in
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // console.log(user);
+          navigate('/browse')
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    } else {
+      // sign in form logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          navigate('/browse')
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
   }
 
   function handleToggle() {
     setIsSignIn(!isSignIn);
   }
+
   return (
     <div className="relative h-screen w-screen">
       {/* Background Image */}
