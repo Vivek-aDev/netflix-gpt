@@ -19,10 +19,6 @@ const Login = () => {
 
   function handleButtonClick() {
     // Validate the form data
-
-    // console.log(email.current.value);
-    // console.log(password);
-
     const message = checkValidData(email.current.value, password.current.value);
     // console.log(message);
     setErrorMessage(message);
@@ -57,7 +53,9 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user, "User");
+          // console.log(user.uid, "user UID");
+          
           navigate('/browse')
         })
         .catch((error) => {
