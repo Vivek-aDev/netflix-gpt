@@ -3,12 +3,10 @@ import netflixLogo from "../../assets/Netflix-logo.png";
 import userLogo from "../../assets/user.png";
 import { auth } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
-  // console.log(user);
-  
   const navigate = useNavigate();
   const handleSignOut = () => {
     signOut(auth)
@@ -18,6 +16,7 @@ const Header = () => {
       })
       .catch((error) => {
         // An error happened.
+        navigate('/error')
       });
   };
 
@@ -29,7 +28,7 @@ const Header = () => {
       </button> */}
       {user && (
         <div className="flex p-5 justify-between">
-          <img className="w-12 h-12" src={userLogo} alt="userLogo" />
+          <img className="w-12 h-12" src={user?.photoURL || userLogo} alt="userLogo" />
           <button
             onClick={handleSignOut}
             className="font-bold text-white h-12 px-2"

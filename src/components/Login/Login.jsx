@@ -5,15 +5,20 @@ import { checkValidData } from "../../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../utils/userSlice";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -36,7 +41,27 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           // console.log(user);
-          navigate('/browse')
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/60030641?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMessage(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -55,8 +80,8 @@ const Login = () => {
           const user = userCredential.user;
           // console.log(user, "User");
           // console.log(user.uid, "user UID");
-          
-          navigate('/browse')
+
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -97,6 +122,7 @@ const Login = () => {
           <div className="space-y-4">
             {!isSignIn && (
               <input
+                ref={name}
                 className="border border-gray-600 bg-black bg-opacity-60 text-white p-3 rounded-sm w-full focus:outline-none focus:border-red-500"
                 type="text"
                 placeholder="Name"
