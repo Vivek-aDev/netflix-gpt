@@ -23,7 +23,6 @@ const Login = () => {
   function handleButtonClick() {
     // Validate the form data
     const message = checkValidData(email.current.value, password.current.value);
-    // console.log(message);
     setErrorMessage(message);
 
     if (message) return;
@@ -38,7 +37,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          // console.log(user);
           updateProfile(user, {
             displayName: name.current.value,
             photoURL: "https://avatars.githubusercontent.com/u/60030641?v=4",
